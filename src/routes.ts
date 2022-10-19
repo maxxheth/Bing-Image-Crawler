@@ -13,7 +13,6 @@ dotenv.config()
 const download = (url: string) => {
     
     const path = process.env.FILEPATH as string
-    // const path = '/var/www/bing-image-crawler/imgs/'
     
     try {
 
