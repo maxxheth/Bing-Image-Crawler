@@ -12,7 +12,8 @@ dotenv.config()
 
 const download = (url: string) => {
     
-    const path = process.env.FILEPATH as string
+    // const path = process.env.FILEPATH as string
+    const path = '/var/www/bing-image-crawler/imgs/'
     
     try {
 
@@ -49,17 +50,24 @@ router.addDefaultHandler(async ({ enqueueLinks, page, log }) => {
 
     await page.waitForSelector('.b_searchbox')
 
-    await page.locator('.b_searchbox').fill(process.env.KEYWORD as string)
+    // console.log(process.env.KEYWORD)
+
+    // await page.locator('.b_searchbox').fill(process.env.KEYWORD as string)
+    await page.locator('.b_searchbox').fill('hamburgers')
+    
 
     await page.locator('.b_searchboxSubmit').click()
 
-    await page.waitForTimeout(200000)
+    await page.waitForTimeout(2000)
+
 
     const imgUrls = await page.$$eval('a.iusc', (links: HTMLAnchorElement[]) => {
 
         return links.map(link => link.href)        
 
     })
+
+    log.info('imgUrls', { imgUrls })
 
     await enqueueLinks({
         globs: imgUrls, 

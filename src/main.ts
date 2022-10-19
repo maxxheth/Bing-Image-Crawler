@@ -15,7 +15,7 @@ const startUrls = ['https://bing.com/images/feed'];
 const crawler = new PlaywrightCrawler({
     // proxyConfiguration: new ProxyConfiguration({ proxyUrls: ['...'] }),
     requestHandler: router,
-    headless
+    headless: false
     // maxRequestRetries: 200,
 });
 
