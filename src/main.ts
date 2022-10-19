@@ -4,7 +4,7 @@ import { router } from './routes.js';
 import * as dotenv from 'dotenv'
 dotenv.config()
 
-const headless = process.env.USE_BROWSER === 'yes' || !!process.env.USE_BROWSER
+const headless = process.env.HEADLESS === 'yes' || !!process.env.HEADLESS
 
 console.log({headless})
 
@@ -15,7 +15,7 @@ const startUrls = ['https://bing.com/images/feed'];
 const crawler = new PlaywrightCrawler({
     // proxyConfiguration: new ProxyConfiguration({ proxyUrls: ['...'] }),
     requestHandler: router,
-    headless: false
+    headless
     // maxRequestRetries: 200,
 });
 

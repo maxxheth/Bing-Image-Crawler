@@ -12,8 +12,8 @@ dotenv.config()
 
 const download = (url: string) => {
     
-    // const path = process.env.FILEPATH as string
-    const path = '/var/www/bing-image-crawler/imgs/'
+    const path = process.env.FILEPATH as string
+    // const path = '/var/www/bing-image-crawler/imgs/'
     
     try {
 
@@ -29,6 +29,7 @@ const download = (url: string) => {
         const lastFrag = splitUrlFrags[splitUrlFrags.length - 1]
 
         https.get(url, (res) => {
+
             const writeStream = fs.createWriteStream(path + lastFrag);
 
             res.pipe(writeStream);
@@ -50,11 +51,7 @@ router.addDefaultHandler(async ({ enqueueLinks, page, log }) => {
 
     await page.waitForSelector('.b_searchbox')
 
-    // console.log(process.env.KEYWORD)
-
-    // await page.locator('.b_searchbox').fill(process.env.KEYWORD as string)
-    await page.locator('.b_searchbox').fill('hamburgers')
-    
+    await page.locator('.b_searchbox').fill(process.env.KEYWORD as string)
 
     await page.locator('.b_searchboxSubmit').click()
 
